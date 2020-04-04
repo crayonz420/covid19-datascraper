@@ -1,1 +1,1 @@
-# covid19-datascraper
+# COVID-19 Data Scraper
