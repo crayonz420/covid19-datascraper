@@ -1,0 +1,16 @@
+[
+  {
+    "4/2/2020": {
+      "positiveCases": "373",
+      "deathCount": "9"
+    }
+  },
+  {
+    "4/3/2020": {
+      "positiveCases": "416",
+      "deathCount": "12",
+      "changeInCases": "43",
+      "changeInDeaths": "3"
+    }
+  }
+]
