@@ -21,7 +21,8 @@ const gatheredData = await scraper.scrapeData({
     covidDeathsPath: ""                          // JS Path of number of COVID-19 deaths
   });
 ```
-Execute the application using Node.js:
+Execute the application using Node.js, then navigate to [localhost:8080](http://localhost:8080/):
 ```
 > node app.js
+Listening on port 8080
 ```
