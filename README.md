@@ -1,3 +1,7 @@
 # COVID-19 Data Scraper
 
-Uses Puppeteer to scrape county health department websites for COVID-19 (Coronavirus) data
+Scrapes county health department websites for COVID-19 (Coronavirus) data
+
+Uses:
+Puppeteer for web scraping
+Express and EJS for web server
