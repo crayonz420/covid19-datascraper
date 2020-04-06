@@ -2,7 +2,7 @@
 
 Scrapes county health department websites for COVID-19 (Coronavirus) data
 
-## Tools
+## Packages used
 
 - Puppeteer for web scraping
 - Express and EJS for web server
