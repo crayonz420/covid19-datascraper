@@ -1,24 +1,40 @@
 [
   {
     "4/1/2020": {
-      "positiveCases": "339",
-      "deathCount": "8"
+      "positiveCases": 339,
+      "deathCount": 8
     }
   },
   {
     "4/2/2020": {
-      "positiveCases": "373",
-      "deathCount": "9",
-      "changeInCases": "34",
-      "changeInDeaths": "1"
+      "positiveCases": 373,
+      "deathCount": 9,
+      "changeInCases": 34,
+      "changeInDeaths": 1
     }
   },
   {
     "4/3/2020": {
-      "positiveCases": "416",
-      "deathCount": "12",
-      "changeInCases": "43",
-      "changeInDeaths": "3"
+      "positiveCases": 416,
+      "deathCount": 12,
+      "changeInCases": 43,
+      "changeInDeaths": 3
+    }
+  },
+  {
+    "4/4/2020": {
+      "positiveCases": 510,
+      "deathCount": 12,
+      "changeInCases": 94,
+      "changeInDeaths": 0
+    }
+  },
+  {
+    "4/5/2020": {
+      "positiveCases": 539,
+      "deathCount": 12,
+      "changeInCases": 29,
+      "changeInDeaths": 0
     }
   }
 ]

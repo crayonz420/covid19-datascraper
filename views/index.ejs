@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>COVID-19</title>
+  </head>
+  <body>
+    <div>
+      <h1>🦠 COVID-19 (Coronavirus) Cases</h1>
+      <h3>Alameda County</h3>
+      <h3><%= date %></h3>
+      <div>
+        <p class="counter">Positive Cases: </p>
+        <p class="counter"><%= posCases %></p>
+      </div>
+      <div>
+        <p class="counter">Deaths: </p>
+        <p class="counter"><%= deathCount %></p>
+      </div>
+      <form method="POST">
+        <button class="refresh">Refresh</button>
+      </form>
+      <p>Last updated seconds ago</p>
+    </div>
+  </body>
+</html>

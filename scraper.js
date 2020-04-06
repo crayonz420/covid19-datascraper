@@ -3,7 +3,7 @@ const colors = require('colors');
 const puppeteerExtra = require('puppeteer-extra');
 const pluginStealth = require('puppeteer-extra-plugin-stealth');
 
-async function scrapeData({
+let scrapeData = async function scrapeData({
   regionName: regionName,
   url: url,
   datePath: datePath,
@@ -17,25 +17,23 @@ async function scrapeData({
   const page = await browser.newPage();
 
   await page.goto(url);
-  await page.waitFor(1000);
-  await page.screenshot({
-    path: "debug.png",
-    fullPage: true,
-  });
+  await page.waitFor(500);
 
   console.log(`\n${colors.underline("COVID-19 in " + regionName)}`);
 
   date = await getDate(page, datePath);
   covidCases = await getData("cases", page, covidCasesPath, covidDeathsPath);
   covidDeaths = await getData("deaths", page, covidCasesPath, covidDeathsPath);
-  casesDiff = await previousCounts("cases", date);
-  deathDiff = await previousCounts("deaths", date);
+  casesDiff = await previousCounts("cases", covidCases, date);
+  deathDiff = await previousCounts("deaths", covidDeaths, date);
   await writeData(date, covidCases, covidDeaths, casesDiff, deathDiff);
 
   console.log(`${colors.gray(date)} \n${colors.red(covidCases)} cases \n${colors.brightRed(covidDeaths)} deaths \n`);
   console.log(`${colors.red(casesDiff)} more cases than yesterday \n${colors.brightRed(deathDiff)} more deaths than yesterday \n`);
 
   await browser.close();
+
+  return [date, covidCases, covidDeaths, casesDiff, deathDiff];
 }
 
 async function getData(type, page, covidCasesPath, covidDeathsPath) {
@@ -50,7 +48,7 @@ async function getData(type, page, covidCasesPath, covidDeathsPath) {
     countArray.pop();
   }
 
-  return countArray.join("");
+  return parseInt(countArray.join(""));
 }
 
 async function getDate(page, datePath) {
@@ -60,17 +58,25 @@ async function getDate(page, datePath) {
   return dateFormatted;
 }
 
-function previousCounts(type, date) {
+function previousCounts(type, amount, date) {
   let data = fs.readFileSync("data.json", "utf-8");
   let jsonData = JSON.parse(data);
-  if (type == "cases") {
-    let todayCasesCount = jsonData[jsonData.length - 1][date]["positiveCases"];
-    let yesterdayCasesCount = jsonData[jsonData.length - 2][Object.keys(jsonData[jsonData.length - 2])]["positiveCases"];
-    return todayCasesCount - yesterdayCasesCount;
-  } else if (type == "deaths") {
-    let todayDeathCount = jsonData[jsonData.length - 1][date]["deathCount"];
-    let yesterdayDeathCount = jsonData[jsonData.length - 2][Object.keys(jsonData[jsonData.length - 2])]["deathCount"];
-    return todayDeathCount - yesterdayDeathCount;
+  if (Object.keys(jsonData[jsonData.length - 1])[0] == date) {
+    if (type == "cases") {
+      return jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["changeInCases"];
+    } else if (type == "deaths") {
+      return jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["changeInDeaths"];
+    }
+  } else {
+    if (type == "cases") {
+      let todayCasesCount = amount;
+      let yesterdayCasesCount = jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["positiveCases"];
+      return todayCasesCount - yesterdayCasesCount;
+    } else if (type == "deaths") {
+      let todayDeathCount = amount;
+      let yesterdayDeathCount = jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["deathCount"];
+      return todayDeathCount - yesterdayDeathCount;
+    }
   }
 }
 
@@ -83,37 +89,25 @@ function writeData(date, positiveCases, deathCount, changeInCases, changeInDeath
     }
     jsonData.push({
       [date]: {
-        positiveCases: positiveCases,
-        deathCount: deathCount,
-        changeInCases: changeInCases,
-        changeInDeaths: changeInDeaths
+        positiveCases: parseInt(positiveCases),
+        deathCount: parseInt(deathCount),
+        changeInCases: parseInt(changeInCases),
+        changeInDeaths: parseInt(changeInDeaths)
       }
     });
     fs.writeFile("data.json", JSON.stringify(jsonData, null, 2), "utf-8", function() {});
   });
+  return null;
 }
 
+module.exports.scrapeData = scrapeData;
+
+/*
 scrapeData({
-  /*
-  regionName: Name of region
-  url: URL of data
-  datePath: JS query selector path of date
-  covidCasesPath: JS query selector path of positive COVID-19 cases
-  covidDeathsPath: JS query selector path of COVID-19 deaths
-  */
   regionName: "Alameda County",
   url: "http://www.acphd.org/2019-ncov.aspx",
   datePath: "body > div.full_container.middle_full > div > div > div.hall.hidari > div > table > tbody > tr > td > div > p:nth-child(2)",
   covidCasesPath: "body > div.full_container.middle_full > div > div > div.hall.hidari > div > table > tbody > tr > td > div > p:nth-child(3) > em:nth-child(1)",
   covidDeathsPath: "body > div.full_container.middle_full > div > div > div.hall.hidari > div > table > tbody > tr > td > div > p:nth-child(3) > em:nth-child(3)"
 });
-
-/*
-scrapeData(
-  "Contra Costa County",
-  "https://www.coronavirus.cchealth.org/",
-  "#comp-k8hrbjp9 > p > span",
-  "#comp-k8kvfzcf > h1 > span",
-  "#comp-k8kvjz6p > h1 > span"
-);
 */
