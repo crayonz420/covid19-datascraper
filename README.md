@@ -21,3 +21,7 @@ const gatheredData = await scraper.scrapeData({
     covidDeathsPath: ""                          // JS Path of number of COVID-19 deaths
   });
 ```
+Execute the application using Node.js:
+```
+> node app.js
+```
