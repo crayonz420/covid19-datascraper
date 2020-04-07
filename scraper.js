@@ -23,7 +23,7 @@ let scrapeData = async function scrapeData({
   const page = await browser.newPage();
 
   await page.goto(url);
-  await page.waitFor(500);
+  await page.waitFor(1500);
 
   console.log(`\n${colors.underline("COVID-19 in " + regionName)}`);
 
