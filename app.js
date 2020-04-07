@@ -1,7 +1,7 @@
 const express = require('express');
 const scraper = require('./scraper');
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8080;
 
 app.use(express.static("public"));
 
