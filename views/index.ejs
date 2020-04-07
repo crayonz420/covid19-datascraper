@@ -10,19 +10,25 @@
     <div>
       <h1>🦠 COVID-19 (Coronavirus) Cases</h1>
       <h3>Alameda County</h3>
-      <h3><%= date %></h3>
+      <select class="dateSelector" name="">
+        <option value="date"><%= date %> (Today)</option>
+        <% dateEntries.forEach((archivedDate) => { %>
+        <option value="date"><%= archivedDate %></option>
+        <% }) %>
+      </select>
+      <label>➡️</label>
       <div>
-        <p class="counter">Positive Cases: </p>
-        <p class="counter"><%= posCases %></p>
+        <h3 class="section">Cases on <%= date %></h3>
+        <p>😷 Positive Cases: <strong><%= posCases %></strong></p>
+        <p>☠️ Deaths: <strong><%= deathCount %></strong></p>
+        <h3 class="section">Compared to Day Before</h3>
+        <p>😷 Difference in Cases: <strong><%= posCasesDiff %></strong></p>
+        <p>☠️ Difference in Deaths: <strong><%= deathCountDiff %></strong></p>
       </div>
-      <div>
-        <p class="counter">Deaths: </p>
-        <p class="counter"><%= deathCount %></p>
-      </div>
+      <br>
       <form method="POST">
-        <button class="refresh">Refresh</button>
+        <button class="refresh">🔄 Refresh</button>
       </form>
-      <p>Last updated seconds ago</p>
     </div>
   </body>
 </html>

@@ -40,11 +40,11 @@ async function getData(type, page, covidCasesPath, covidDeathsPath) {
   let jsPath;
   const casesJSPath = covidCasesPath;
   const deathsJSPath = covidDeathsPath;
-  type == "cases" ? jsPath = casesJSPath : jsPath = deathsJSPath;
+  type === "cases" ? jsPath = casesJSPath : jsPath = deathsJSPath;
   const countElement = await page.$(jsPath);
   const countTxt = await (await countElement.getProperty("textContent")).jsonValue();
   const countArray = countTxt.split("");
-  if (countArray[countArray.length - 1] == "*") {
+  if (countArray[countArray.length - 1] === "*") {
     countArray.pop();
   }
 
@@ -61,18 +61,18 @@ async function getDate(page, datePath) {
 function previousCounts(type, amount, date) {
   let data = fs.readFileSync("data.json", "utf-8");
   let jsonData = JSON.parse(data);
-  if (Object.keys(jsonData[jsonData.length - 1])[0] == date) {
-    if (type == "cases") {
+  if (Object.keys(jsonData[jsonData.length - 1])[0] === date) {
+    if (type === "cases") {
       return jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["changeInCases"];
-    } else if (type == "deaths") {
+    } else if (type === "deaths") {
       return jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["changeInDeaths"];
     }
   } else {
-    if (type == "cases") {
+    if (type === "cases") {
       let todayCasesCount = amount;
       let yesterdayCasesCount = jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["positiveCases"];
       return todayCasesCount - yesterdayCasesCount;
-    } else if (type == "deaths") {
+    } else if (type === "deaths") {
       let todayDeathCount = amount;
       let yesterdayDeathCount = jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["deathCount"];
       return todayDeathCount - yesterdayDeathCount;
@@ -100,14 +100,27 @@ function writeData(date, positiveCases, deathCount, changeInCases, changeInDeath
   return null;
 }
 
-module.exports.scrapeData = scrapeData;
+function getArchivedData(type, date=null) {
+  let data = fs.readFileSync("data.json", "utf-8");
+  let jsonData = JSON.parse(data);
+  if (type === "entryDates") {
+    let dateOfEntries = [];
+    for (var i = 1; i < jsonData.length; i++) {
+      dateOfEntries.push(Object.keys(jsonData[i - 1]).join());
+    }
+    return dateOfEntries;
+  } else if (type === "entry" && date) {
+    for (var i = 0; i < jsonData.length; i++) {
+      if (Object.keys(jsonData[i]) == date) {
+        let positiveCases = jsonData[i][Object.keys(jsonData[i])]["positiveCases"];
+        let deathCount = jsonData[i][Object.keys(jsonData[i])]["deathCount"];
+        let changeInCases = jsonData[i][Object.keys(jsonData[i])]["changeInCases"];
+        let changeInDeaths = jsonData[i][Object.keys(jsonData[i])]["changeInDeaths"];
+        return [date, positiveCases, deathCount, changeInCases, changeInDeaths];
+      }
+    }
+  }
+}
 
-/*
-scrapeData({
-  regionName: "Alameda County",
-  url: "http://www.acphd.org/2019-ncov.aspx",
-  datePath: "body > div.full_container.middle_full > div > div > div.hall.hidari > div > table > tbody > tr > td > div > p:nth-child(2)",
-  covidCasesPath: "body > div.full_container.middle_full > div > div > div.hall.hidari > div > table > tbody > tr > td > div > p:nth-child(3) > em:nth-child(1)",
-  covidDeathsPath: "body > div.full_container.middle_full > div > div > div.hall.hidari > div > table > tbody > tr > td > div > p:nth-child(3) > em:nth-child(3)"
-});
-*/
+module.exports.scrapeData = scrapeData;
+module.exports.getArchivedData = getArchivedData;
