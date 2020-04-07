@@ -12,7 +12,12 @@ let scrapeData = async function scrapeData({
 }) {
   puppeteerExtra.use(pluginStealth());
   const browser = await puppeteerExtra.launch({
-    headless: true
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage'
+    ]
   });
   const page = await browser.newPage();
 
