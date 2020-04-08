@@ -1,5 +1,6 @@
 const express = require('express');
 const scraper = require('./scraper');
+const client = require('redis').createClient(process.env.REDIS_URL);
 const app = express();
 const port = process.env.PORT || 8080;
 
