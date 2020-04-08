@@ -8,29 +8,35 @@
   </head>
   <body>
     <div>
-      <h1>🦠 COVID-19 (Coronavirus) Cases</h1>
-      <h3>Alameda County</h3>
-      <select class="dateSelector" name="">
-        <option value="date"><%= date %> (Today)</option>
-        <% dateEntries.forEach((archivedDate) => { %>
-        <option value="date"><%= archivedDate %></option>
-        <% }) %>
-      </select>
-      <label>
-          <button class="submit">➡️</button>
-      </label>
-      <div>
-        <h3 class="section">Cases on <%= date %></h3>
-        <p>😷 Positive Cases: <strong><%= posCases %></strong></p>
-        <p>☠️ Deaths: <strong><%= deathCount %></strong></p>
-        <h3 class="section">Compared to Day Before</h3>
-        <p>😷 Difference in Cases: <strong><%= posCasesDiff %></strong></p>
-        <p>☠️ Difference in Deaths: <strong><%= deathCountDiff %></strong></p>
+      <div id="mainContent">
+        <h1>🦠 COVID-19 (Coronavirus) Statistics</h1>
+        <h3>Alameda County</h3>
+        <select class="dateSelector" name="">
+          <option value="date"><%= date %> (Today)</option>
+          <% dateEntries.forEach((archivedDate) => { %>
+          <option value="date"><%= archivedDate %></option>
+          <% }) %>
+        </select>
+        <label>
+            <button class="submit">➡️</button>
+        </label>
+        <div>
+          <h3 class="section">Cases on <%= date %></h3>
+          <p>😷 Positive Cases: <strong><%= posCases %></strong></p>
+          <p>☠️ Deaths: <strong><%= deathCount %></strong></p>
+          <h3 class="section">Compared to Day Before</h3>
+          <p>😷 Difference in Cases: <strong><%= posCasesDiff %></strong></p>
+          <p>☠️ Difference in Deaths: <strong><%= deathCountDiff %></strong></p>
+        </div>
+        <br>
+        <form method="POST">
+          <button class="refresh">🔄 Fetch latest</button>
+        </form>
       </div>
-      <br>
-      <form method="POST">
-        <button class="refresh">🔄 Fetch latest</button>
-      </form>
     </div>
+    <footer>
+      <p>© Copyright 2020 • <a href="https://github.com/crayonz420/covid19-datascraper" target="_blank">Source Code</a></p>
+      <p>Built with <a href="https://nodejs.org/en/" target="_blank">Node.js</a> and <a href="https://expressjs.com/" target="_blank">Express</a> • Hosted with <a href="https://www.heroku.com/home" target="_blank">Heroku</a></p>
+    </footer>
   </body>
 </html>

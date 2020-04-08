@@ -9,6 +9,8 @@ Scrapes county health department websites for COVID-19 (Coronavirus) data
 
 ## Usage
 
+Live demo on [Heroku](https://covidscraper.herokuapp.com/)
+
 Modify app.js such that:
 ```js
 // Note: You can get JS path using "Inspect Element > Copy > Copy JS Path"

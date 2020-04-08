@@ -60,5 +60,13 @@
       "changeInCases": 45,
       "changeInDeaths": 2
     }
+  },
+  {
+    "4/8/2020": {
+      "positiveCases": 640,
+      "deathCount": 16,
+      "changeInCases": 38,
+      "changeInDeaths": 1
+    }
   }
 ]

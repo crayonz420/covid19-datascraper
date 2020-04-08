@@ -1,7 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Muli:wght@400;500;600;800;900&display=swap');
 
-body {
+html, body {
   font-family: -apple-system, "Muli", sans-serif;
+  height: 100%;
+}
+
+div {
+  min-height: 100%;
+}
+
+#mainContent {
+  overflow: auto;
+  padding-bottom: 50px;
   margin-left: 50px;
 }
 
@@ -53,4 +63,21 @@ select {
 
 label {
   cursor: pointer;
+}
+
+footer {
+  font-size: 11px;
+  text-align: center;
+  position: relative;
+  height: 50px;
+  margin-top: -50px;
+  clear: both;
+}
+
+a {
+  color: black;
+}
+
+a:visited {
+    color: black;
 }
