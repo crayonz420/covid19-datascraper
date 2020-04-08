@@ -15,9 +15,9 @@ app.get("/", async (req, res) => {
   const gatheredData = await scraper.scrapeData({
     regionName: "Alameda County",
     url: "http://www.acphd.org/2019-ncov.aspx",
-    datePath: "body > div.full_container.middle_full > div > div > div.hall.hidari > div > table > tbody > tr > td > div > p:nth-child(2)",
-    covidCasesPath: "body > div.full_container.middle_full > div > div > div.hall.hidari > div > table > tbody > tr > td > div > p:nth-child(3) > em:nth-child(1)",
-    covidDeathsPath: "body > div.full_container.middle_full > div > div > div.hall.hidari > div > table > tbody > tr > td > div > p:nth-child(3) > em:nth-child(3)"
+    datePath: "body > div.full_container.middle_full > div > div > div.hall.migi > div > div > div > div > div > p:nth-child(2)",
+    covidCasesPath: "body > div.full_container.middle_full > div > div > div.hall.migi > div > div > div > div > div > p:nth-child(3) > em:nth-child(1)",
+    covidDeathsPath: "body > div.full_container.middle_full > div > div > div.hall.migi > div > div > div > div > div > p:nth-child(3) > em:nth-child(3)"
   });
   const dateEntries = await scraper.getArchivedData("entryDates").reverse();
   //gatheredData = await scraper.getArchivedData("entry", dateEntries[1]);
