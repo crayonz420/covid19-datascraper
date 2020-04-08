@@ -12,6 +12,21 @@ app.set("view options", {
 });
 
 app.get("/", async (req, res) => {
+  const dateEntries = await scraper.getArchivedData("entryDates").reverse();
+  const gatheredData = await scraper.getArchivedData("fetchLast");
+  res.render("index", {
+    dateEntries: dateEntries,
+    date: gatheredData[0],
+    posCases: gatheredData[1],
+    deathCount: gatheredData[2],
+    posCasesDiff: gatheredData[3],
+    deathCountDiff: gatheredData[4],
+  })
+});
+
+app.post("/", async (req, res) => {
+  console.log("Got a POST request");
+  const dateEntries = await scraper.getArchivedData("entryDates").reverse();
   const gatheredData = await scraper.scrapeData({
     regionName: "Alameda County",
     url: "http://www.acphd.org/2019-ncov.aspx",
@@ -19,9 +34,7 @@ app.get("/", async (req, res) => {
     covidCasesPath: "body > div.full_container.middle_full > div > div > div.hall.migi > div > div > div > div > div > p:nth-child(3) > em:nth-child(1)",
     covidDeathsPath: "body > div.full_container.middle_full > div > div > div.hall.migi > div > div > div > div > div > p:nth-child(3) > em:nth-child(3)"
   });
-  const dateEntries = await scraper.getArchivedData("entryDates").reverse();
-  //gatheredData = await scraper.getArchivedData("entry", dateEntries[1]);
-  res.render("index", {
+  await res.render("index", {
     dateEntries: dateEntries,
     date: gatheredData[0],
     posCases: gatheredData[1],
@@ -30,11 +43,6 @@ app.get("/", async (req, res) => {
     deathCountDiff: gatheredData[4],
     timeSinceRefresh: null
   });
-});
-
-app.post("/", (req, res) => {
-  console.log("Got a POST request");
-  res.redirect("/");
 });
 
 app.listen(port, (error) => {

@@ -125,6 +125,13 @@ function getArchivedData(type, date=null) {
         return [date, positiveCases, deathCount, changeInCases, changeInDeaths];
       }
     }
+  } else if (type == "fetchLast") {
+    let date = Object.keys(jsonData[jsonData.length - 1]).join();
+    let positiveCases = jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["positiveCases"];
+    let deathCount = jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["deathCount"];
+    let changeInCases = jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["changeInCases"];
+    let changeInDeaths = jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["changeInDeaths"];
+    return [date, positiveCases, deathCount, changeInCases, changeInDeaths];
   }
 }
 
