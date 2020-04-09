@@ -15,6 +15,15 @@ div {
   margin-left: 50px;
 }
 
+#statsContent {
+  display: inline-block;
+}
+
+#graphContent {
+  margin-left: 50px;
+  display: inline-block;
+}
+
 p {
   margin: 0;
   padding: 2px;

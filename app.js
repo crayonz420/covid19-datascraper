@@ -21,6 +21,8 @@ app.get("/", async (req, res) => {
     deathCount: gatheredData[2],
     posCasesDiff: gatheredData[3],
     deathCountDiff: gatheredData[4],
+    labels: dateEntries,
+    data: [0, 45, 34, 43, 94, 29, 18, 45, 38]
   })
 });
 
