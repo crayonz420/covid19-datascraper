@@ -90,3 +90,41 @@ a {
 a:visited {
     color: black;
 }
+
+#graphContainer {
+  width: 400px !important;
+  height: 400px !important;
+}
+
+
+@media screen and (max-width: 750px) {
+  #graphContent {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  #mainContent {
+    margin-left: 20px;
+  }
+
+  #graphContainer {
+    width: 350px !important;
+    height: 360px !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #graphContainer {
+    text-align: center;
+    width: 300px !important;
+    height: 320px !important;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #graphContainer {
+    width: 280px !important;
+    height: 300px !important;
+  }
+}

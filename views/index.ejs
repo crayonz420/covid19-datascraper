@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -36,7 +37,9 @@
           </form>
         </div>
         <div id="graphContent">
-          <canvas id="myChart" style="position:relative; width:400px; height:250px"></canvas>
+          <div id="graphContainer">
+            <canvas id="myChart"></canvas>
+          </div>
           <script type="text/javascript">let ctx = document.getElementById('myChart').getContext('2d')</script>
           <script>
           let chart = new Chart(ctx, {
@@ -52,7 +55,7 @@
                   }]
               },
               options: {
-                responsive: false,
+                responsive: true,
                 maintainAspectRatio: false
               }
           });

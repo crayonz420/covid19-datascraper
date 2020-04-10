@@ -12,38 +12,38 @@ app.set("view options", {
 });
 
 app.get("/", async (req, res) => {
-  const dateEntries = await scraper.getArchivedData("entryDates").reverse();
+  console.log("Got a GET request");
   const gatheredData = await scraper.getArchivedData("fetchLast");
   res.render("index", {
-    dateEntries: dateEntries,
+    dateEntries: await scraper.getArchivedData("entryDates").reverse(),
     date: gatheredData[0],
     posCases: gatheredData[1],
     deathCount: gatheredData[2],
     posCasesDiff: gatheredData[3],
     deathCountDiff: gatheredData[4],
-    labels: dateEntries,
-    data: [0, 45, 34, 43, 94, 29, 18, 45, 38]
+    labels: await scraper.getArchivedData("entryDates"),
+    data: await scraper.getArchivedData("fetchAllCasesPerDay")
   })
 });
 
 app.post("/", async (req, res) => {
   console.log("Got a POST request");
-  const dateEntries = await scraper.getArchivedData("entryDates").reverse();
   const gatheredData = await scraper.scrapeData({
     regionName: "Alameda County",
-    url: "http://www.acphd.org/2019-ncov.aspx",
-    datePath: "body > div.full_container.middle_full > div > div > div.hall.migi > div > div > div > div > div > p:nth-child(3)",
-    covidCasesPath: "body > div.full_container.middle_full > div > div > div.hall.migi > div > div > div > div > div > p:nth-child(4) > em:nth-child(1)",
-    covidDeathsPath: "body > div.full_container.middle_full > div > div > div.hall.migi > div > div > div > div > div > p:nth-child(4) > em:nth-child(3)"
+    url: "https://ac-hcsa.maps.arcgis.com/apps/opsdashboard/index.html#/0e964821bf1844029c6b72303d7efa00",
+    datePath: "body > div > div > div > div > div > div > margin-container > full-container > div:nth-child(2) > margin-container > full-container > div > div > p > em > span > strong",
+    covidCasesPath: "body > div > div > div > div > div > div > margin-container > full-container > div:nth-child(4) > margin-container > full-container  > div > div > div > div > svg",
+    covidDeathsPath: "body > div > div > div > div > div > div > margin-container > full-container > div:nth-child(5) > margin-container > full-container  > div > div > div > div > svg"
   });
   await res.render("index", {
-    dateEntries: dateEntries,
+    dateEntries: await scraper.getArchivedData("entryDates").reverse(),
     date: gatheredData[0],
     posCases: gatheredData[1],
     deathCount: gatheredData[2],
     posCasesDiff: gatheredData[3],
     deathCountDiff: gatheredData[4],
-    timeSinceRefresh: null
+    labels: await scraper.getArchivedData("entryDates"),
+    data: await scraper.getArchivedData("fetchAllCasesPerDay")
   });
 });
 

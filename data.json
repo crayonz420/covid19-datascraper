@@ -2,7 +2,9 @@
   {
     "3/31/2020": {
       "positiveCases": 294,
-      "deathCount": 7
+      "deathCount": 7,
+      "changeInCases": 30,
+      "changeInDeaths": 0
     }
   },
   {
@@ -67,6 +69,14 @@
       "deathCount": 16,
       "changeInCases": 38,
       "changeInDeaths": 1
+    }
+  },
+  {
+    "4/9/2020": {
+      "positiveCases": 681,
+      "deathCount": 16,
+      "changeInCases": 41,
+      "changeInDeaths": 0
     }
   }
 ]

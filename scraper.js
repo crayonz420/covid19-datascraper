@@ -23,7 +23,8 @@ let scrapeData = async function scrapeData({
   const page = await browser.newPage();
 
   await page.goto(url);
-  await page.waitFor(1500);
+  await page.waitFor(3000);
+  await page.screenshot({path: "debug.png"});
 
   console.log(`\n${colors.underline("COVID-19 in " + regionName)}`);
 
@@ -49,6 +50,7 @@ async function getData(type, page, covidCasesPath, covidDeathsPath) {
   type === "cases" ? jsPath = casesJSPath : jsPath = deathsJSPath;
   const countElement = await page.$(jsPath);
   const countTxt = await (await countElement.getProperty("textContent")).jsonValue();
+  await countTxt.trim();
   const countArray = countTxt.split("");
   if (countArray[countArray.length - 1] === "*") {
     countArray.pop();
@@ -60,7 +62,7 @@ async function getData(type, page, covidCasesPath, covidDeathsPath) {
 async function getDate(page, datePath) {
   const dateElement = await page.$(datePath);
   const dateTxt = await (await dateElement.getProperty("textContent")).jsonValue();
-  const dateFormatted = dateTxt.substring(0, dateTxt.indexOf(","));
+  const dateFormatted = dateTxt.substring(8, dateTxt.indexOf("w")).trim();
   return dateFormatted;
 }
 
@@ -132,6 +134,12 @@ function getArchivedData(type, date=null) {
     let changeInCases = jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["changeInCases"];
     let changeInDeaths = jsonData[jsonData.length - 1][Object.keys(jsonData[jsonData.length - 1])]["changeInDeaths"];
     return [date, positiveCases, deathCount, changeInCases, changeInDeaths];
+  } else if (type == "fetchAllCasesPerDay") {
+    let cases = [];
+    for (var i = 0; i < jsonData.length; i++) {
+      cases.push(jsonData[i][Object.keys(jsonData[i])]["changeInCases"]);
+    }
+    return cases;
   }
 }
 
