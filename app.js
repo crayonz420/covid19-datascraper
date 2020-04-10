@@ -30,7 +30,7 @@ app.post("/", async (req, res) => {
   console.log("Got a POST request");
   const gatheredData = await scraper.scrapeData({
     regionName: "Alameda County",
-    url: "https://ac-hcsa.maps.arcgis.com/apps/opsdashboard/index.html#/0e964821bf1844029c6b72303d7efa00",
+    url: "https://ac-hcsa.maps.arcgis.com/apps/opsdashboard/index.html#/948c67558cff414dbbee1a78fcbab1c9",
     datePath: "body > div > div > div > div > div > div > margin-container > full-container > div:nth-child(2) > margin-container > full-container > div > div > p > em > span > strong",
     covidCasesPath: "body > div > div > div > div > div > div > margin-container > full-container > div:nth-child(4) > margin-container > full-container  > div > div > div > div > svg",
     covidDeathsPath: "body > div > div > div > div > div > div > margin-container > full-container > div:nth-child(5) > margin-container > full-container  > div > div > div > div > svg"

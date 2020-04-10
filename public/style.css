@@ -69,6 +69,15 @@ button.refresh:hover {
   background-color: #b5b5b5;
 }
 
+button.submit {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline:none;
+}
+
 select {
   background-color: lightblue;
   padding: 5px;
