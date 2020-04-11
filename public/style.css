@@ -18,16 +18,50 @@ div {
 #statsContent {
   display: inline-block;
   vertical-align: top;
-  /* Causes 50px space below statsContent
-  position: relative;
-  top: -50px;
-  */
 }
 
 #graphContent {
   margin-left: 50px;
   display: inline-block;
   vertical-align: top;
+}
+
+.regionNav {
+  backface-visibility: hidden;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 2px;
+  border-radius: 4px;
+  padding: 10px 15px 10px 15px;
+  background-color: lightgray;
+  cursor: pointer;
+  color: black;
+  font-weight: 800;
+  font-size: 14px;
+  color: black;
+  -webkit-transition: background-color 0.2s ease-out;
+  -moz-transition: background-color 0.2s ease-out;
+  -o-transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
+}
+
+.regionNav:hover {
+  background-color: #b5b5b5;
+}
+
+.scrollContainer {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+
+  .regionNav {
+    display: inline-block;
+  }
+}
+
+.scrollContainer::-webkit-scrollbar {
+    display: none;
 }
 
 p {
@@ -38,6 +72,7 @@ p {
 h1 {
   font-weight: 900;
   font-style: normal;
+  margin-bottom: 0;
 }
 
 h3.section {

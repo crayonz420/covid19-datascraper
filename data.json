@@ -78,5 +78,13 @@
       "changeInCases": 41,
       "changeInDeaths": 0
     }
+  },
+  {
+    "4/10/2020": {
+      "positiveCases": 730,
+      "deathCount": 19,
+      "changeInCases": 49,
+      "changeInDeaths": 3
+    }
   }
 ]
