@@ -1,3 +1,16 @@
+/*
+
+Next steps:
+* Refactor scraper.js
+  - Condensing algorithms
+  - Compatibility with other regions
+    - Need to add params in app.js
+    - COMPLETE: getArchivedData, writeData
+* Get preliminary data for data.json
+* Template on line 22, i.e. const alameda = {...}
+
+*/
+
 const express = require('express');
 const scraper = require('./scraper');
 const app = express();
@@ -13,25 +26,68 @@ app.set("view options", {
 
 app.get("/", async (req, res) => {
   console.log("Got a GET request");
-  const gatheredData = await scraper.getArchivedData("fetchLast");
-  res.render("index", {
-    dateEntries: await scraper.getArchivedData("entryDates").reverse(),
-    date: gatheredData[0],
-    posCases: gatheredData[1],
-    deathCount: gatheredData[2],
-    posCasesDiff: gatheredData[3],
-    deathCountDiff: gatheredData[4],
-    labels: await scraper.getArchivedData("entryDates"),
-    data: await scraper.getArchivedData("fetchAllCasesPerDay")
-  })
+  let region = req.query.region ? req.query.region : "";
+  if (region.toLowerCase() === "alameda") {
+    const gatheredData = await scraper.getArchivedData("fetchLast", "alameda");
+    res.render("index", {
+      dateEntries: await scraper.getArchivedData("entryDates", "alameda").reverse(),
+      regionName: "Alameda County",
+      date: gatheredData[0],
+      posCases: gatheredData[1],
+      deathCount: gatheredData[2],
+      posCasesDiff: gatheredData[3],
+      deathCountDiff: gatheredData[4],
+      labels: await scraper.getArchivedData("entryDates", "alameda"),
+      data: await scraper.getArchivedData("fetchAllCasesPerDay", "alameda")
+    })
+  } else if (region.toLowerCase() === "cc") {
+    // const gatheredData = await scraper.getArchivedData("fetchLast", "cc");
+    res.render("index", {
+      dateEntries: await scraper.getArchivedData("entryDates", "cc").reverse(),
+      regionName: "Contra Costa County",
+      date: "Contra Costa County",
+      posCases: "CC cases",
+      deathCount: "CC deaths",
+      posCasesDiff: "CC case diff",
+      deathCountDiff: "CC death diff",
+      labels: await scraper.getArchivedData("entryDates", "cc"),
+      data: await scraper.getArchivedData("fetchAllCasesPerDay", "cc")
+    })
+  } else if (region.toLowerCase() === "sf") {
+    // const gatheredData = await scraper.getArchivedData("fetchLast", "sf");
+    res.render("index", {
+      dateEntries: await scraper.getArchivedData("entryDates", "sf").reverse(),
+      regionName: "San Francisco",
+      date: "SF date",
+      posCases: "SF cases",
+      deathCount: "SF deaths",
+      posCasesDiff: "SF case diff",
+      deathCountDiff: "SF death diff",
+      labels: await scraper.getArchivedData("entryDates", "sf"),
+      data: await scraper.getArchivedData("fetchAllCasesPerDay", "sf")
+    })
+  } else {
+    res.render("index", {
+      dateEntries: await scraper.getArchivedData("entryDates", "alameda").reverse(),
+      regionName: null,
+      date: null,
+      posCases: null,
+      deathCount: null,
+      posCasesDiff: null,
+      deathCountDiff: null,
+      labels: null,
+      data: null
+    })
+  }
 });
 
 app.post("/", async (req, res) => {
   console.log("Got a POST request");
   const gatheredData = await scraper.scrapeData({
+    regionId: "alameda",
     regionName: "Alameda County",
-    url: "https://ac-hcsa.maps.arcgis.com/apps/opsdashboard/index.html#/948c67558cff414dbbee1a78fcbab1c9",
-    datePath: "body > div > div > div > div > div > div > margin-container > full-container > div:nth-child(2) > margin-container > full-container > div > div > p > em > span > strong",
+    url: "ttps://ac-hcsa.maps.arcgis.com/apps/opsdashboard/index.html#/1e0ac4385cbe4cc1bffe2cf7f8e7f0d9",
+    datePath: "body > div > div > div > div > div > div > margin-container > full-container > div:nth-child(2) > margin-container > full-container > div > div > p > em > span",
     covidCasesPath: "body > div > div > div > div > div > div > margin-container > full-container > div:nth-child(4) > margin-container > full-container  > div > div > div > div > svg",
     covidDeathsPath: "body > div > div > div > div > div > div > margin-container > full-container > div:nth-child(5) > margin-container > full-container  > div > div > div > div > svg"
   });

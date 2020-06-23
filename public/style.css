@@ -49,6 +49,29 @@ div {
   background-color: #b5b5b5;
 }
 
+#randomButton {
+  animation: colorchange 5s infinite;
+  -webkit-animation: colorchange 5s infinite;
+}
+
+@keyframes colorchange
+{
+  0%   {background: red;}
+  25%  {background: yellow;}
+  50%  {background: lightblue;}
+  75%  {background: lightgreen;}
+  100% {background: red;}
+}
+
+@-webkit-keyframes colorchange
+{
+  0%   {background: red;}
+  25%  {background: purple;}
+  50%  {background: blue;}
+  75%  {background: lightgreen;}
+  100% {background: red;}
+}
+
 .scrollContainer {
   overflow-x: scroll;
   overflow-y: hidden;
@@ -133,11 +156,21 @@ footer {
   clear: both;
 }
 
-a {
+a.buttonLink {
+  color: black;
+  text-decoration: none;
+}
+
+a.buttonLink:visited {
+  color: black;
+  text-decoration: none;
+}
+
+a.footer {
   color: black;
 }
 
-a:visited {
+a.footer:visited {
     color: black;
 }
 

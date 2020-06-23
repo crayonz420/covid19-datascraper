@@ -14,14 +14,29 @@
         <div class="headerContent">
           <h1>🦠 COVID-19 (Coronavirus) Statistics</h1>
           <div class="scrollContainer">
-            <button class="regionNav">🎲</button>
-            <button class="regionNav">Alameda County</button>
-            <button class="regionNav">Contra Costa County</button>
-            <button class="regionNav">San Francisco</button>
+            <script>
+              function randomRegion() {
+                let random = Math.floor(Math.random() * 3);
+                if (random == 0) {
+                  document.getElementById("randomButton").innerHTML = "⌛";
+                  window.location.href = "/?region=alameda"
+                } else if (random == 1) {
+                  document.getElementById("randomButton").innerHTML = "⌛";
+                  window.location.href = "/?region=cc"
+                } else if (random == 2) {
+                  document.getElementById("randomButton").innerHTML = "⌛";
+                  window.location.href = "/?region=sf"
+                }
+              }
+            </script>
+            <button class="regionNav" id="randomButton" onclick="randomRegion()">🎲</button>
+            <button class="regionNav"><a class="buttonLink" href="/?region=alameda">Alameda County</a></button>
+            <button class="regionNav"><a class="buttonLink" href="/?region=cc">Contra Costa County</a></button>
+            <button class="regionNav"><a class="buttonLink" href="/?region=sf">San Francisco</a></button>
           </div>
         </div>
         <div id="statsContent">
-          <h3>Alameda County</h3>
+          <h3><%= regionName %></h3>
           <select class="dateSelector" name="">
             <option value="date"><%= date %> (Today)</option>
             <% dateEntries.forEach((archivedDate) => { %>
@@ -72,8 +87,8 @@
       </div>
     </div>
     <footer>
-      <p>© Copyright 2020 • <a href="https://github.com/crayonz420/covid19-datascraper" target="_blank">Source Code</a> • Data from <a href="http://www.acphd.org/2019-ncov.aspx" target="_blank">ACPHD</a></p>
-      <p>Built with <a href="https://nodejs.org/en/" target="_blank">Node.js</a> and <a href="https://expressjs.com/" target="_blank">Express</a> • Hosted with <a href="https://www.heroku.com/home" target="_blank">Heroku</a></p>
+      <p>© Copyright 2020 • <a class="footer" href="https://github.com/crayonz420/covid19-datascraper" target="_blank">Source Code</a> • Data from <a class="footer" href="http://www.acphd.org/2019-ncov.aspx" target="_blank">ACPHD</a></p>
+      <p>Built with <a class="footer" href="https://nodejs.org/en/" target="_blank">Node.js</a> and <a class="footer" href="https://expressjs.com/" target="_blank">Express</a> • Hosted with <a class="footer" href="https://www.heroku.com/home" target="_blank">Heroku</a></p>
     </footer>
   </body>
 </html>

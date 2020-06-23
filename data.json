@@ -1,90 +1,126 @@
-[
-  {
-    "3/31/2020": {
-      "positiveCases": 294,
-      "deathCount": 7,
-      "changeInCases": 30,
-      "changeInDeaths": 0
+{
+  "alameda": [
+    {
+      "3/31/2020": {
+        "positiveCases": 294,
+        "deathCount": 7,
+        "changeInCases": 30,
+        "changeInDeaths": 0
+      }
+    },
+    {
+      "4/1/2020": {
+        "positiveCases": 339,
+        "deathCount": 8,
+        "changeInCases": 45,
+        "changeInDeaths": 1
+      }
+    },
+    {
+      "4/2/2020": {
+        "positiveCases": 373,
+        "deathCount": 9,
+        "changeInCases": 34,
+        "changeInDeaths": 1
+      }
+    },
+    {
+      "4/3/2020": {
+        "positiveCases": 416,
+        "deathCount": 12,
+        "changeInCases": 43,
+        "changeInDeaths": 3
+      }
+    },
+    {
+      "4/4/2020": {
+        "positiveCases": 510,
+        "deathCount": 12,
+        "changeInCases": 94,
+        "changeInDeaths": 0
+      }
+    },
+    {
+      "4/5/2020": {
+        "positiveCases": 539,
+        "deathCount": 12,
+        "changeInCases": 29,
+        "changeInDeaths": 0
+      }
+    },
+    {
+      "4/6/2020": {
+        "positiveCases": 557,
+        "deathCount": 13,
+        "changeInCases": 18,
+        "changeInDeaths": 1
+      }
+    },
+    {
+      "4/7/2020": {
+        "positiveCases": 602,
+        "deathCount": 15,
+        "changeInCases": 45,
+        "changeInDeaths": 2
+      }
+    },
+    {
+      "4/8/2020": {
+        "positiveCases": 640,
+        "deathCount": 16,
+        "changeInCases": 38,
+        "changeInDeaths": 1
+      }
+    },
+    {
+      "4/9/2020": {
+        "positiveCases": 681,
+        "deathCount": 16,
+        "changeInCases": 41,
+        "changeInDeaths": 0
+      }
+    },
+    {
+      "4/10/2020": {
+        "positiveCases": 730,
+        "deathCount": 19,
+        "changeInCases": 49,
+        "changeInDeaths": 3
+      }
+    },
+    {
+      "4/11/2020": {
+        "positiveCases": 770,
+        "deathCount": 20,
+        "changeInCases": 40,
+        "changeInDeaths": 1
+      }
+    },
+    {
+      "4/12/2020": {
+        "positiveCases": 807,
+        "deathCount": 22,
+        "changeInCases": 37,
+        "changeInDeaths": 2
+      }
+    },
+    {
+      "4/13/2020": {
+        "positiveCases": 850,
+        "deathCount": 22,
+        "changeInCases": 43,
+        "changeInDeaths": 0
+      }
+    },
+    {
+      "4/14/2020": {
+        "positiveCases": 849,
+        "deathCount": 22,
+        "changeInCases": -1,
+        "changeInDeaths": 0
+      }
     }
-  },
-  {
-    "4/1/2020": {
-      "positiveCases": 339,
-      "deathCount": 8,
-      "changeInCases": 45,
-      "changeInDeaths": 1
-    }
-  },
-  {
-    "4/2/2020": {
-      "positiveCases": 373,
-      "deathCount": 9,
-      "changeInCases": 34,
-      "changeInDeaths": 1
-    }
-  },
-  {
-    "4/3/2020": {
-      "positiveCases": 416,
-      "deathCount": 12,
-      "changeInCases": 43,
-      "changeInDeaths": 3
-    }
-  },
-  {
-    "4/4/2020": {
-      "positiveCases": 510,
-      "deathCount": 12,
-      "changeInCases": 94,
-      "changeInDeaths": 0
-    }
-  },
-  {
-    "4/5/2020": {
-      "positiveCases": 539,
-      "deathCount": 12,
-      "changeInCases": 29,
-      "changeInDeaths": 0
-    }
-  },
-  {
-    "4/6/2020": {
-      "positiveCases": 557,
-      "deathCount": 13,
-      "changeInCases": 18,
-      "changeInDeaths": 1
-    }
-  },
-  {
-    "4/7/2020": {
-      "positiveCases": 602,
-      "deathCount": 15,
-      "changeInCases": 45,
-      "changeInDeaths": 2
-    }
-  },
-  {
-    "4/8/2020": {
-      "positiveCases": 640,
-      "deathCount": 16,
-      "changeInCases": 38,
-      "changeInDeaths": 1
-    }
-  },
-  {
-    "4/9/2020": {
-      "positiveCases": 681,
-      "deathCount": 16,
-      "changeInCases": 41,
-      "changeInDeaths": 0
-    }
-  },
-  {
-    "4/10/2020": {
-      "positiveCases": 730,
-      "deathCount": 19,
-      "changeInCases": 49,
-      "changeInDeaths": 3
-    }
-  }
-]
+  ],
+  "cc": [],
+  "sf": []
+}
